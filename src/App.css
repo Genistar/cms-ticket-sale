@@ -1,0 +1,97 @@
+body{
+    font-family: 'Nunito Sans', sans-serif;
+    font-style: normal;
+    background-color: #F9F6F4;
+  }
+  /* input-search */
+  .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child{
+    display:none
+  }
+  .ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child) {
+    border-radius: 12px;
+    height: 48px;
+    background-color: #EDE6E6;
+  }
+  .ant-input-group > .ant-input-affix-wrapper:not(:last-child) .ant-input {
+    background-color: #EDE6E6;
+  }
+/* input-search */
+/* menu */
+  .ant-menu > .ant-menu-item:hover,
+.ant-menu > .ant-menu-submenu:hover,
+.ant-menu > .ant-menu-item-active,
+.ant-menu> .ant-menu-submenu-active,
+.ant-menu > .ant-menu-item-open,
+.ant-menu> .ant-menu-submenu-open,
+.ant-menu > .ant-menu-item-selected,
+.ant-menu > .ant-menu-submenu-selected
+{
+  background-color: #FFB800;
+  color: #fff;
+}
+.ant-menu-vertical > .ant-menu-item {
+  height: 48px;
+  line-height: 48px;
+}
+
+.ant-menu-item {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.ant-menu-item-selected,
+.ant-menu-item-selected a{
+  color: #ffffff !important;
+}
+
+.ant-menu-submenu-selected {
+  background-color: #FFB800 ;
+  color: #ffffff !important;
+}
+
+.ant-menu-item-active,
+.ant-menu-submenu-active {
+  color: #FFB800;
+  background-color: #fff2e7;
+}
+
+.ant-menu-submenu-title {
+  display: flex;
+  align-items: center;
+}
+
+.ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title {
+  height: 48px;
+  line-height: 48px;
+}
+
+.ant-menu-submenu-expand-icon,
+.ant-menu-submenu-arrow {
+  color: inherit;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #FFB800;
+  height: 56px;
+  border-radius: 8px ;
+}
+.ant-menu-item a:hover{
+  color: #fff;
+}
+.ant-menu-inline.ant-menu-root .ant-menu-item, .ant-menu-inline.ant-menu-root .ant-menu-submenu-title {
+  height: 56px;
+}
+.ant-menu-inline .ant-menu-selected::after, .ant-menu-inline .ant-menu-item-selected::after {
+  transform: none;
+  opacity: 0;
+  transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.ant-menu-submenu-expand-icon, .ant-menu-submenu-arrow {
+  color: inherit;
+  display: none;
+}
+.ant-menu-submenu,.ant-menu-submenu-inline{
+  width: 212px;
+  border-radius: 12px;
+}
+/* menu */
