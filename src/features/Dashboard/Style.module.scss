@@ -1,0 +1,35 @@
+$pAbsolute : absolute; 
+.selectdate{
+    position: $pAbsolute;
+    height: 40px;
+    left: 1035px;
+    top: 69px;
+    .datepicker{
+        width: 155px;
+        height: 40px;
+        border-radius: 4px;
+    }
+}
+.textContent{
+    position: $pAbsolute;
+    top: 79px;
+    font-weight: 700;
+}
+.saleMonth{
+    position: $pAbsolute;
+    top: 356px;
+    .saleMonth_label{
+        color: #1E0D03;
+        font-weight: 500;
+    }
+    .saleMonth_number{
+        position: $pAbsolute;
+        top:-6.5px
+    }
+    .saleMonth_value{
+        position:$pAbsolute; 
+        top: 30px; 
+        left: 164px; 
+        font-weight: 500;
+    }
+}

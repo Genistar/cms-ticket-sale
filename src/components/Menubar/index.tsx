@@ -27,11 +27,11 @@ function getItem(
     } as MenuItem;
 }
 const items: MenuItem[] = [
-    getItem(<Link to='/'>Trang chủ</Link>, '/', <Icon color='#000' component={home} />),
-    getItem(<Link to='/admin/ticketmanagament'>Quản lý vé</Link>, '/admin/ticketmanagament', <Icon component={ticket} />),
-    getItem(<Link to='/admin/checkticket'>Đối soát vé</Link>, '/admin/checkticket', <Icon component={check} />),
-    getItem(<Link to='/admin/setting' style={{ color: '#000' }}>Cài đặt</Link>, '/admin/setting', <Icon component={setting} />, [
-        getItem('Gói dịch vụ', '/admin/servicepackage')
+    getItem(<Link to='/home' style={{ fontWeight: 700 }}>Trang chủ</Link>, '/home', <Icon color='#000' component={home} />),
+    getItem(<Link to='/ticketmanagament' style={{ fontWeight: 700 }}>Quản lý vé</Link>, '/ticketmanagament', <Icon component={ticket} />),
+    getItem(<Link to='/checkticket' style={{ fontWeight: 700 }}>Đối soát vé</Link>, '/checkticket', <Icon component={check} />),
+    getItem(<Link to='/setting' style={{ color: '#000', fontWeight: 700 }}>Cài đặt</Link>, '/setting', <Icon component={setting} />, [
+        getItem('Gói dịch vụ', '/servicepackage')
     ]
     ),
 ]
@@ -40,7 +40,7 @@ const Menubar = (props: Props) => {
     return (
         <div>
             <Menu
-                defaultSelectedKeys={['/']}
+                defaultSelectedKeys={['/admin']}
                 defaultOpenKeys={['sub1']}
                 mode="inline"
                 items={items}
