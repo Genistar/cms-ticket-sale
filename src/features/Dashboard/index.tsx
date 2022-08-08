@@ -1,12 +1,13 @@
 import { Area } from '@ant-design/plots';
-import { Col, DatePicker, Row, Typography } from 'antd';
+import { Card, Col, DatePicker, Row, Typography } from 'antd';
 import Icon from '@ant-design/icons'
 import React, { useEffect, useState } from 'react';
 import styles from './Style.module.scss'
 import { calendar } from '../../asset/Icon/iconHome';
-import moment from 'moment';
+import Donut from '../../components/Donut';
 
 type Props = {}
+
 const dateFormat = 'YYYY-MM-DD';
 const DashboardPage = (props: Props) => {
     const [data, setData] = useState([]);
@@ -33,21 +34,28 @@ const DashboardPage = (props: Props) => {
     };
 
     return (
-        <Row>
-            <Col span={6} className={styles.textContent}>Doanh thu</Col>
-            <Col span={6} className={styles.selectdate}>
-                <DatePicker className={styles.datepicker} suffixIcon={<Icon component={calendar} placeholder='Chọn ngày' />} />
-            </Col>
-            <Area {...config} style={{ width: 1168, height: 237, position: 'absolute', top: 109, left: 24 }} color='#FF993C' />
-            <Col className={styles.saleMonth}>
-                <Typography.Text className={styles.saleMonth_label}>Tổng danh thu theo tuần</Typography.Text>
-                <Typography.Title className={styles.saleMonth_number} level={3}>123.123.000</Typography.Title>
-                <Typography.Text className={styles.saleMonth_value}>đồng</Typography.Text>
-            </Col>
-            <Col span={4}>
-                <DatePicker className={styles.datepicker} style={{ top: 400 }} suffixIcon={<Icon component={calendar} placeholder='Chọn ngày' />} />
-            </Col>
-        </Row>
+        <Card style={{ borderRadius: 24 }}>
+            <Row>
+                <Col span={6} className={styles.textContent}>Doanh thu</Col>
+                <Col span={6} className={styles.selectdate}>
+                    <DatePicker className={styles.datepicker} suffixIcon={<Icon component={calendar} placeholder='Chọn ngày' />} />
+                </Col>
+                <Area {...config} style={{ width: 1168, height: 237, position: 'absolute', top: 109, left: 24 }} color='#FF993C' />
+                <Col className={styles.saleMonth}>
+                    <Typography.Text className={styles.saleMonth_label}>Tổng danh thu theo tuần</Typography.Text>
+                    <Typography.Title className={styles.saleMonth_number} level={3}>123.123.000</Typography.Title>
+                    <Typography.Text className={styles.saleMonth_value}>đồng</Typography.Text>
+                </Col>
+                <Col span={4}>
+                    <DatePicker className={styles.datepicker} style={{ top: 400 }} suffixIcon={<Icon component={calendar} placeholder='Chọn ngày' />} />
+                </Col>
+                <Col span={4} style={{ marginTop: 410, height: 200, width: 400 }}>
+                    <Donut />
+                </Col>
+
+            </Row>
+        </Card>
+
     )
 }
 

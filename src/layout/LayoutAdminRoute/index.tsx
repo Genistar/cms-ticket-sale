@@ -16,7 +16,7 @@ type Props = {}
 
 const breadcrumbNameMap: Record<string, string> = {
     '/home': "Thống kê",
-    "/ticketmanagament": "Quản lý vé",
+    "/ticketmanagament": "Danh sách vé",
     "/checkticket": "Đối soát vé"
 };
 const LayoutAdminPage: React.FC = (props: Props) => {
@@ -58,15 +58,13 @@ const LayoutAdminPage: React.FC = (props: Props) => {
                 <Content
                     className={styles.site_layout_content}
                 >
-                    <Card className={styles.card_content}>
-                        <Breadcrumb separator=''>{extraBreadcrumbItems}</Breadcrumb>
-                        <Routes>
-                            <Route path='/home' element={<DashboardPage />} />
-                            <Route path='/ticketmanagament' element={<TicketManagementPage />} />
-                            <Route path='/checkticket' element={<CheckTicketPage />} />
-                            <Route path='/setting' element={'setting'} />
-                        </Routes>
-                    </Card>
+                    <Breadcrumb separator='' >{extraBreadcrumbItems}</Breadcrumb>
+                    <Routes>
+                        <Route path='/home' element={<DashboardPage />} />
+                        <Route path='/ticketmanagament' element={<TicketManagementPage />} />
+                        <Route path='/checkticket' element={<CheckTicketPage />} />
+                        <Route path='/setting' element={'setting'} />
+                    </Routes>
                 </Content>
 
             </Layout>

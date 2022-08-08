@@ -1,10 +1,15 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import CheckList from './CheckList'
 
 type Props = {}
 
 const CheckTicketPage = (props: Props) => {
     return (
-        <div>CheckTicketPage</div>
+        <Routes>
+            <Route path="/" element={<CheckList />} />
+        </Routes>
+
     )
 }
 

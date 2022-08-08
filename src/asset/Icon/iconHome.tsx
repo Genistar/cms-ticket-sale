@@ -26,6 +26,12 @@ const settingSvg = () => (
 
 
 );
+const sortSvg = () => (
+    <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 1H1L9 10.46V17L13 19V10.46L21 1Z" stroke="#FF993C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+
+)
 const iconCalendar = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="#FF993C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -51,5 +57,8 @@ export const setting = (props: Partial<CustomIconComponentProps>) => (
 );
 export const calendar = (props: Partial<CustomIconComponentProps>) => (
     <Icon component={iconCalendar} {...props} />
+);
+export const sort = (props: Partial<CustomIconComponentProps>) => (
+    <Icon component={sortSvg} {...props} />
 );
 
