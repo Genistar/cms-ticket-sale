@@ -30,8 +30,8 @@ const items: MenuItem[] = [
     getItem(<Link to='/home' style={{ fontWeight: 700 }}>Trang chủ</Link>, '/home', <Icon color='#000' component={home} />),
     getItem(<Link to='/ticketmanagament' style={{ fontWeight: 700 }}>Quản lý vé</Link>, '/ticketmanagament', <Icon component={ticket} />),
     getItem(<Link to='/checkticket' style={{ fontWeight: 700 }}>Đối soát vé</Link>, '/checkticket', <Icon component={check} />),
-    getItem(<Link to='/setting' style={{ color: '#000', fontWeight: 700 }}>Cài đặt</Link>, '/setting', <Icon component={setting} />, [
-        getItem('Gói dịch vụ', '/servicepackage')
+    getItem('Cài đặt', '/setting', <Icon component={setting} />, [
+        getItem(<Link to='/setting/servicepackage' style={{ color: '#000', fontWeight: 700 }}>Gói dịch vụ</Link>, '/setting/servicepackage')
     ]
     ),
 ]

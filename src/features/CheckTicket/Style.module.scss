@@ -1,7 +1,7 @@
 .container1{
     background-color: #fff;
     height: 653px;
-    width: 98%;
+    width: 853px;
     border-radius: 24px;
     &_warp{
         position: absolute;
@@ -14,7 +14,7 @@
         .btn{
             height: 44px;
             width: 174px;
-            left: 429px;
+            left: 454px;
             border-radius: 8px;
             padding: 11px, 24px, 11px, 24px;
             border: none;
@@ -24,11 +24,80 @@
             font-weight: 700;
         }
     }
+    .table{
+        position: absolute;
+        height: 400px;
+        width: 814px;
+        top:120px;
+    }
     
+}
+.dark{
+    background-color: #F1F4F8;
+}
+.light{
+    background-color: #fff;
 }
 .container2{
     background-color: #fff;
     height: 653px;
-    width: 98%;
+    width: 363px;
     border-radius: 24px;
+    .content{
+        position: absolute;
+        top:20px
+    }
+    .form{
+        position: absolute;
+        top:60px;
+        .radio{
+            width: 175px;
+            margin-left: 35px;
+            margin-top: 7px;
+        }
+        .datepicker{
+            width: 165px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: #F7F8FB;
+            margin-top: -2px;
+        }
+        .btn_sort{
+            box-sizing: border-box;
+
+/* Auto layout */
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 11px 24px;
+            gap: 10px;
+
+            position: absolute;
+            width: 160px;
+            height: 44px;
+            left: 86px;
+            top: 306px;
+
+            /* Yellow/1 */
+
+            border: 1px solid #FF993C;
+            border-radius: 8px;
+            .text{
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 26px;
+                display: flex;
+                align-items: center;
+                color: #FF993C;
+                flex: none;
+                order: 0;
+                flex-grow: 0;
+            }
+        }
+    }
+    
 }

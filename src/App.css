@@ -92,8 +92,8 @@ body{
 }
 /* menu */
 /*Table*/
-.ant-table {
-  width: 1190px;
+.ant-table-wrapper{
+  max-width: none;
 }
 .ant-table-tbody > tr > td {
   padding: 10px;
@@ -148,4 +148,11 @@ body{
 }
 .ant-pagination-item-active>a:hover{
   color: #A5A8B1;
+}
+/*Form*/
+.ant-form-item-label > label{
+  font-weight: 700;
+}
+.ant-form-item-label > label::after{
+  display: none;
 }

@@ -94,7 +94,7 @@ const TicketList = (props: Props) => {
                     dataSource={data}
                     pagination={{
                         pageSize: 9,
-                        position: ["bottomRight"],
+                        position: ["bottomCenter"],
                         showLessItems: true,
                         showSizeChanger: false,
                         itemRender(page, type, element) {
@@ -107,7 +107,7 @@ const TicketList = (props: Props) => {
                             return element;
                         },
                     }}
-                    className={styles.table}
+                    className={styles.ant_table}
                     bordered={false}
                 />
             </Row>

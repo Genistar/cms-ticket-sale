@@ -8,6 +8,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import TicketManagementPage from '../../features/TicketManagement';
 import CheckTicketPage from '../../features/CheckTicket';
 import DashboardPage from '../../features/Dashboard';
+import PackageServicePage from '../../features/PackageService';
 import { Link } from 'react-router-dom';
 const { Sider, Header, Content, Footer } = Layout;
 
@@ -17,7 +18,8 @@ type Props = {}
 const breadcrumbNameMap: Record<string, string> = {
     '/home': "Thống kê",
     "/ticketmanagament": "Danh sách vé",
-    "/checkticket": "Đối soát vé"
+    "/checkticket": "Đối soát vé",
+    '/setting/servicepackage': 'Danh sách gói vé'
 };
 const LayoutAdminPage: React.FC = (props: Props) => {
     const location = useLocation();
@@ -63,7 +65,7 @@ const LayoutAdminPage: React.FC = (props: Props) => {
                         <Route path='/home' element={<DashboardPage />} />
                         <Route path='/ticketmanagament' element={<TicketManagementPage />} />
                         <Route path='/checkticket' element={<CheckTicketPage />} />
-                        <Route path='/setting' element={'setting'} />
+                        <Route path='/setting/servicepackage' element={<PackageServicePage />} />
                     </Routes>
                 </Content>
 
