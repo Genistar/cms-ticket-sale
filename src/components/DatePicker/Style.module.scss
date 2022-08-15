@@ -1,0 +1,28 @@
+.datepicker{
+    height: 40px;
+    width: 155px;
+    border-radius: 4px;
+    padding: 8px, 12px, 8px, 12px;
+    background: #FFFFFF;
+    border: 1px solid #E6E0E0;
+    border-radius: 4px;
+}
+
+.calendarWrapper{
+    width: 370px;
+    height: 396px;
+    .typeCalendar{
+    position: absolute;
+    height: 24px;
+    width: 306px;
+    left: 32px;
+    top: -260px;
+    border-radius: 0px;
+
+}
+.select{
+    width: 32px;
+    height: 32px;
+    background: #FFBA7B;
+}
+}

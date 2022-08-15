@@ -10,6 +10,13 @@ $pAbsolute : absolute;
         border-radius: 4px;
     }
 }
+.datepicker1{
+    position: $pAbsolute;
+    width: 155px;
+    height: 40px;
+    border-radius: 4px;
+    top:400px
+}
 .textContent{
     position: $pAbsolute;
     top: 79px;
@@ -31,5 +38,34 @@ $pAbsolute : absolute;
         top: 30px; 
         left: 164px; 
         font-weight: 500;
+    }
+}
+.donutLabel{
+    width: 112px;
+    height: 28px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    color: #1E0D03;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin-left: 25%;
+}
+.cardLegend{
+    height: 20px;
+    width: 44px;
+    left: 0px;
+    top: 1px;
+    border-radius: 4px;
+    .legendText{
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        color: #1E0D03;
     }
 }

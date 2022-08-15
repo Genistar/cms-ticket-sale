@@ -1,0 +1,34 @@
+.Calendar__header{
+    padding: none;
+    width: 182px;
+    height: 26px;
+    margin-right: 170px;
+}
+.anticon > * {
+    line-height: 1;
+    width: 20px;
+    height: 20px;
+}
+.anticon-calendar,.anticon-clock-circle{
+    color: #FF993C;
+}
+.Calendar__weekDays {
+    top:76px
+}
+.Calendar__sectionWrapper{
+    top:76px
+}
+.Calendar__yearText,.Calendar__monthText{
+    font-size: 18px;
+}
+.Calendar__day.-ltr{
+    width: 32px;
+    height: 32px;
+    padding: 20.78px;
+}
+.Calendar__weekRow{
+    width: 320px;
+}
+.ant-picker-large .ant-picker-input > input {
+    font-size: 15px;
+}

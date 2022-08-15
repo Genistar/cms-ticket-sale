@@ -9,12 +9,12 @@ export interface TicketType {
     name?: string;
 }[]
 export interface packageType {
-    stt: number,
-    packageId: string,
+    stt?: number,
+    packageId?: string,
     name: string,
-    dateApply: string,
-    dateExp: string,
-    price: string,
-    comboPrice: string,
+    dateApply: any,
+    dateExp: any,
+    price: any,
+    comboPrice: any,
     status: boolean,
 }

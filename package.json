@@ -6,6 +6,7 @@
     "@ant-design/charts": "^1.4.2",
     "@ant-design/plots": "^1.2.1",
     "@antv/g2": "^4.2.5",
+    "@hassanmojab/react-modern-calendar-datepicker": "^3.1.7",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",

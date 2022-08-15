@@ -1,6 +1,5 @@
 .container{
     position: absolute;
-    top:70px;
     .search{
         width: 446px;
         background-color: #F7F7F8;
@@ -41,6 +40,10 @@
         width: 1185px;
         top:60px;
     }
+}
+.tabs{
+    position: absolute;
+    top:45px
 }
 .dark{
     background-color: #F1F4F8;

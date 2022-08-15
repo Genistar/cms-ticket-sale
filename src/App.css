@@ -156,3 +156,29 @@ body{
 .ant-form-item-label > label::after{
   display: none;
 }
+/*Modal*/
+.ant-modal-content{
+  border-radius: 16px;
+}
+.ant-modal-header{
+  border-bottom: none;
+  border-radius: 16px;
+}
+.ant-modal-close-x{
+  display: none;
+}
+/*Tabs*/
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: #FF993C;
+  font-size: 700
+}
+.ant-tabs-tab{
+  color: #A5A8B1;
+}
+.ant-tabs-tab:hover{
+  color: #FF993C;
+}
+.ant-tabs-top > .ant-tabs-nav .ant-tabs-ink-bar, .ant-tabs-top > div > .ant-tabs-nav .ant-tabs-ink-bar{
+  background-color: #FF993C;
+  height: 3.5px;
+}
