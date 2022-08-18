@@ -182,3 +182,32 @@ body{
   background-color: #FF993C;
   height: 3.5px;
 }
+/*radio*/
+.ant-radio-inner{
+  height: 24px;
+  width: 24px;
+  border: 2px solid #1890ff;
+}
+.ant-radio-inner::after{
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  margin-left: -16px;
+}
+.ant-radio-checked .ant-radio-inner {
+  border: 2px solid #1890ff;
+}
+.ant-radio-wrapper.ant-radio-wrapper-in-form-item input[type='radio']{
+  width: 24px;
+  height: 24px;
+}
+/*checkbox*/
+.ant-checkbox-inner{
+  width: 24px;
+  height: 24px;
+  border: 2px solid #A5A8B1;
+  border-radius: 5px;
+} 
+.ant-checkbox-inner::after{
+  left:32.5%
+}

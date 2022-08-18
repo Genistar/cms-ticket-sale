@@ -6,14 +6,19 @@ import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
 import './App.css';
 
 import LayoutAdminPage from './layout/LayoutAdminRoute';
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<LayoutAdminPage />} />
-        <Route path='/*' element={<LayoutAdminPage />} />
-      </Routes>
+      <Provider store={store}>
+        <Routes>
+          <Route path='/' element={<LayoutAdminPage />} />
+          <Route path='/*' element={<LayoutAdminPage />} />
+        </Routes>
+      </Provider>
+
     </BrowserRouter>
   );
 }

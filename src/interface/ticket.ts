@@ -1,20 +1,28 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface TicketType {
     stt: number;
+    id?: string;
     ticketId: string;
     ticketNumber: number;
     status: boolean | null;
-    dateUse: string;
-    dateOut: string;
+    dateUsed?: Timestamp;
+    dateOut?: Timestamp;
+    dateExp?: Timestamp;
     checkIn: string;
-    name?: string;
-}[]
+    ticketPiece?: string;
+    statusUse?: 'used' | 'unused' | 'exp';
+    packageId?: string;
+}
 export interface packageType {
+    id?: string,
     stt?: number,
     packageId?: string,
-    name: string,
-    dateApply: any,
-    dateExp: any,
-    price: any,
-    comboPrice: any,
-    status: boolean,
+    packageName?: string,
+    dateApply?: Timestamp,
+    dateExp?: Timestamp,
+    price: string,
+    comboPrice: string,
+    status?: boolean,
+    nameEvent?: string,
 }

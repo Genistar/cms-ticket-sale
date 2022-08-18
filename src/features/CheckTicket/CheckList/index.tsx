@@ -1,11 +1,13 @@
 import { Button, Card, Col, DatePicker, Form, Input, Radio, Row, Space, Typography } from 'antd'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../Style.module.scss'
 import Icon, { SearchOutlined, CaretRightOutlined, CaretLeftOutlined } from '@ant-design/icons'
 import moment from 'moment';
 import Table, { ColumnsType } from 'antd/lib/table';
 import { TicketType } from '../../../interface/ticket';
 import { calendar1 } from '../../../asset/Icon/iconHome';
+import { useAppdispatch, useAppSelector } from '../../../store';
+import { getAll, ticketSelector } from '../../TicketManagement/ticketSlice';
 
 type Props = {}
 type formValue = {
@@ -17,23 +19,13 @@ const CheckList = (props: Props) => {
     const [status, setStatus] = useState<boolean | null>(null);
     const [to, setTo] = useState<Date>();
     const [from, setFrom] = useState<Date>();
-    const [loading, setLoading] = useState<boolean>(false);
-    const data: any[] = [];
-    const date = new Date();
+    const { tickets, loading } = useAppSelector(ticketSelector);
+    const dispatch = useAppdispatch();
     const [form] = Form.useForm();
-    for (var i = 0; i < 50; i++) {
-        data.push({
-            stt: i + 1,
-            ticketId: 'dfdfdsfds' + (i + 1),
-            ticketNumber: 10023460 + i,
-            status: i % 2 === 0 ? true : false,
-            dateUse: moment(date).format('DD/MM/YYYY'),
-            dateOut: moment(date).format('DD/MM/YYYY'),
-            checkIn: i % 2 === 0 ? 'Cổng 2' : 'Cổng 1',
-            name: 'Vé cổng'
-        })
-    }
-    const columns: ColumnsType<TicketType> = [
+    useEffect(() => {
+        dispatch(getAll())
+    }, [])
+    const columns: ColumnsType<any> = [
         {
             title: 'STT',
             dataIndex: 'stt',
@@ -46,13 +38,16 @@ const CheckList = (props: Props) => {
         },
         {
             title: 'Ngày sử dụng',
-            dataIndex: 'dateUse',
-            key: 'dateUse',
+            dataIndex: 'dateUsed',
+            key: 'dateUsed',
+            render: (value) => {
+                return moment(value.toDate()).format('DD/MM/YYYY')
+            }
         },
         {
             title: 'Tên loại vé',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'ticketPiece',
+            key: 'ticketPiece',
         },
         {
             title: 'Cổng check - in',
@@ -68,19 +63,11 @@ const CheckList = (props: Props) => {
         }
     ];
     const onFinish = (va: formValue) => {
-        setLoading(true);
         setFrom(va.form);
         setTo(va.to);
         setStatus(va.status)
         console.log(va.status)
     }
-    const newData1 = () => {
-        if (status === true) {
-            return data.filter((value) => value.status === status)
-        }
-        return data.filter((value) => value.status === false)
-    }
-    const newData = newData1();
     return (
         <Row>
             <Col flex={6}>
@@ -101,7 +88,9 @@ const CheckList = (props: Props) => {
                     <Table
                         rowClassName={(record: any, index: any) => index % 2 === 0 ? styles.light : styles.dark}
                         columns={columns}
-                        dataSource={status === null ? data : newData}
+                        dataSource={tickets.map(ticket => ({
+                            ...ticket
+                        }))}
                         pagination={{
                             pageSize: 10,
                             position: ['bottomCenter'],
@@ -119,6 +108,7 @@ const CheckList = (props: Props) => {
                         }}
                         className={styles.table}
                         bordered={false}
+                        loading={loading}
                     />
                 </Card>
             </Col>

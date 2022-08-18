@@ -1,18 +1,18 @@
 import { DayRange } from '@hassanmojab/react-modern-calendar-datepicker';
 import { Button, Checkbox, DatePicker, Form, Input, Modal, Row, Select, TimePicker, Typography } from 'antd'
 import React, { useState } from 'react';
-import { packageType } from '../../../interface/ticket'
-import CustomDatePicker from '../../../components/DatePicker';
-import styles from '../Style.module.scss'
+import { packageType } from '../../../../../../interface/ticket'
+import CustomDatePicker from '../../../../../../components/DatePicker';
+import styles from '../../../../Style.module.scss'
 
 type Props = {
-    isModalVisible: boolean;
+    isModalUpdateVisible: boolean;
+    setIsModalUpdateVisible: any;
     handelCancel: () => void;
-    setIsModalVisible: any
 }
 
-const ModalAdd: React.FC<Props> = (props: Props) => {
-    const { isModalVisible, setIsModalVisible, handelCancel } = props;
+const ModalUpdate: React.FC<Props> = (props: Props) => {
+    const { isModalUpdateVisible, setIsModalUpdateVisible, handelCancel } = props;
     const [dayRange, setDayRange] = useState<DayRange>({
         from: null,
         to: null,
@@ -20,27 +20,35 @@ const ModalAdd: React.FC<Props> = (props: Props) => {
     const [form] = Form.useForm();
     const onFinish = (value: packageType) => {
         console.log(value)
-        setIsModalVisible(false)
+        setIsModalUpdateVisible(false)
     }
     return (
         <Modal
             title={
                 <Typography.Title level={3} className={styles.content_header}>Thêm gói vé</Typography.Title>
             }
-            visible={isModalVisible}
+            visible={isModalUpdateVisible}
             onCancel={handelCancel}
             className={styles.modal_container}
-            bodyStyle={{ height: 580, width: 758, backgroundColor: '#fff' }}
+            bodyStyle={{ height: 580, width: 758, backgroundColor: '#fff', borderRadius: 24 }}
             width={758}
             centered
             footer={false}
         >
             <Form layout='vertical' form={form} onFinish={onFinish}>
                 <Form.Item
-                    label='Tên gói vé'
-                    name={'name'}
+                    label='Mã sự kiện'
+                    name={'eventId'}
                     className={styles.input_label}
                     style={{ left: 32, top: 81, }}
+                >
+                    <Input className={styles.input_name} style={{ width: 245 }} />
+                </Form.Item>
+                <Form.Item
+                    label='Tên sự kiện'
+                    name={'eventName'}
+                    className={styles.input_label}
+                    style={{ left: 358, top: 81, }}
                 >
                     <Input className={styles.input_name} style={{ width: 367 }} />
                 </Form.Item>
@@ -88,6 +96,7 @@ const ModalAdd: React.FC<Props> = (props: Props) => {
                         <Select.Option value={false}>Tắt</Select.Option>
                     </Select>
                 </Form.Item>
+                <div className={styles.infor}><div style={{ color: 'red', fontSize: 16 }}>*</div>Là thông tin bắt buộc</div>
                 <Form.Item className={styles.footerModalButton} key='submit'>
                     <Button className={styles.cancelBtn} onClick={handelCancel}>
                         <Typography.Text className={styles.textBtnCancel}>Hủy</Typography.Text>
@@ -102,4 +111,4 @@ const ModalAdd: React.FC<Props> = (props: Props) => {
     )
 }
 
-export default ModalAdd
+export default ModalUpdate

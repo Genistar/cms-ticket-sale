@@ -1,19 +1,23 @@
 import { Button, Card, Col, Input, Row, Typography, Space, Tag, Badge } from 'antd';
 import Icon, { SearchOutlined, CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons'
-import React, { useState } from 'react';
-import styles from '../Style.module.scss';
-import { packageType } from '../../../interface/ticket';
+import React, { useEffect, useState } from 'react';
+import styles from '../../Style.module.scss';
+import { packageType } from '../../../../interface/ticket';
 import Table, { ColumnsType } from 'antd/lib/table';
-import { edit } from '../../../asset/Icon/iconHome';
-import ModalAdd from '../components/ModalAdd';
-import ModalUpdate from '../components/ModalUpdate';
+import { edit } from '../../../../asset/Icon/iconHome';
+import ModalAdd from './components/modal/ModalAdd';
+import ModalUpdate from './components/modal/ModalUpdate';
+import { useAppdispatch, useAppSelector } from '../../../../store';
+import { getAll, packageSelector } from '../../packageSlice';
+import moment from 'moment';
+import { CSVLink } from 'react-csv';
 
 type Props = {}
 export const data: any[] = [
     {
         stt: 1,
         packageId: 'ALT20210501',
-        name: 'Gói gia đình',
+        packageName: 'Gói gia đình',
         dateApply: '14/07/2022 08:00:00',
         dateExp: '14/04/2021 23:00:00',
         price: '90.000',
@@ -23,7 +27,7 @@ export const data: any[] = [
     {
         stt: 2,
         packageId: 'ALT20210502',
-        name: 'Gói sự kiện',
+        packName: 'Gói sự kiện',
         dateApply: '14/07/2022 08:00:00',
         dateExp: '14/04/2021 23:00:00',
         price: '20.000',
@@ -34,6 +38,18 @@ export const data: any[] = [
 const PackageList = (props: Props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalUpdateVisible, setIsModalUpdateVisible] = useState(false);
+    const dispatch = useAppdispatch()
+    const { packages } = useAppSelector(packageSelector);
+
+    packages.map((pack) => {
+        console.log(moment(pack.dateApply?.toDate()).format('DD/MM/YYYY'))
+        return pack
+    })
+    console.log(packages)
+
+    useEffect(() => {
+        dispatch(getAll())
+    }, [])
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -45,7 +61,7 @@ const PackageList = (props: Props) => {
     const handleUpdateCancel = () => {
         setIsModalUpdateVisible(false);
     }
-    const columns: ColumnsType<packageType> = [
+    const columns: ColumnsType<any> = [
         {
             title: 'STT',
             dataIndex: 'stt',
@@ -58,18 +74,24 @@ const PackageList = (props: Props) => {
         },
         {
             title: 'Tên gói vé',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'packageName',
+            key: 'packageName',
         },
         {
             title: 'Ngày áp dụng',
             dataIndex: 'dateApply',
             key: 'dateApply',
+            render: (value) => (
+                moment(value.toDate()).format('HH:mm DD/MM/YYYY')
+            )
         },
         {
             title: 'Ngày hết hạn',
             dataIndex: 'dateExp',
             key: 'dateExp',
+            render: (value) => (
+                moment(value.toDate()).format('HH:mm DD/MM/YYYY')
+            )
         },
         {
             title: 'Giá vé (VNĐ/Vé)',
@@ -103,6 +125,23 @@ const PackageList = (props: Props) => {
             ),
         }
     ];
+    const headers = [
+        { label: "STT", key: "stt" },
+        { label: "Mã gói", key: "packageId" },
+        { label: "Tên gói", key: "packageName" },
+        { label: 'Ngày áp dụng', key: 'dateApply' },
+        { label: 'Ngày hết hạn', key: 'dateExp' },
+        { label: 'Giá vé (VNĐ/vé)', key: 'price' },
+        { label: 'Giá combo', key: 'comboPrice' },
+        { label: 'Tình trạng', key: 'status' }
+    ];
+    const data = packages.map((pack) => ({
+        status: pack.status === true ? 'Đang áp dụng' : 'Tắt',
+        dateApply: moment(pack.dateApply?.toDate()).format('HH:mm DD/MM/YYYY'),
+        dateExp: moment(pack.dateExp?.toDate()).format('HH:mm DD/MM/YYYY'),
+        ...pack
+    }))
+    console.log(data)
     return (
         <Card className={styles.container}>
             <Row className={styles.container_warp}>
@@ -116,12 +155,11 @@ const PackageList = (props: Props) => {
                 </Col>
                 <Col flex={3}>
                     <Col span={4}>
-                        <Button className={styles.btn_ex}>
+                        <CSVLink headers={headers} data={data} className={styles.btn_ex}>
                             <Typography.Text className={styles.text_ex}>
                                 Xuất file {'(.csv)'}
                             </Typography.Text>
-
-                        </Button>
+                        </CSVLink>
                     </Col>
                     <Col span={4}>
                         <Button className={styles.btn_add} onClick={showModal}>
@@ -136,7 +174,9 @@ const PackageList = (props: Props) => {
             <Table
                 rowClassName={(record: any, index: any) => index % 2 === 0 ? styles.light : styles.dark}
                 columns={columns}
-                dataSource={data}
+                dataSource={packages.map((pack) => ({
+                    ...pack
+                }))}
                 pagination={{
                     style: { marginTop: 280 },
                     pageSize: 10,

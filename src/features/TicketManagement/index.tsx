@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import TicketList from './TicketList'
+import TicketList from './components/TicketList'
 
 type Props = {}
 
