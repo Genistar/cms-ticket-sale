@@ -213,6 +213,7 @@ const ModalAdd: React.FC<Props> = (props: Props) => {
                                     className={styles.ticket_price}
                                     size='large'
                                     value={priceValue}
+                                    onChange={(e) => { console.log(e.target.value); setPriceValue(e.target.value) }}
                                 />/ vé
                             </Typography.Text>
                         </Form.Item>
@@ -220,7 +221,12 @@ const ModalAdd: React.FC<Props> = (props: Props) => {
                     <Checkbox onChange={() => setCombo(!combo)} checked={combo} style={{ position: 'absolute', top: 85, left: -8 }}>
                         <Form.Item className={styles.checkbox} style={{ top: -6 }} name='comboPrice'>
                             <Typography.Text>
-                                Combo vé với giá <Input className={styles.ticket_price} disabled={combo === false ? true : false} value={comboPrice} />/
+                                Combo vé với giá <Input
+                                    className={styles.ticket_price}
+                                    disabled={combo === false ? true : false}
+                                    value={comboPrice}
+                                    onChange={(e) => setComboPrice(e.target.value)}
+                                />/
                                 <Input className={styles.ticket_price1} disabled={combo === false ? true : false} value={id ? 'Combo' : ''} />/ vé
                             </Typography.Text>
                         </Form.Item>

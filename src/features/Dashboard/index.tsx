@@ -59,6 +59,7 @@ const DashboardPage = (props: Props) => {
                         type="from"
                         dayRange={dayRange}
                         setDayRange={setDayRange}
+                        format={"[Tháng] M, YYYY"}
                     />
                 </Col>
                 <Area {...config} style={{ width: 1168, height: 237, position: 'absolute', top: 109, left: 24 }} color='#FF993C' />
@@ -73,6 +74,7 @@ const DashboardPage = (props: Props) => {
                         type="from"
                         dayRange={dayRange}
                         setDayRange={setDayRange}
+                        format={"[Tháng] M, YYYY"}
                     />
                 </Col>
                 <Col span={4} style={{ position: 'absolute', top: 425, left: 320, height: 200, width: 400 }}>
