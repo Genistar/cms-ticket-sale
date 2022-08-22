@@ -3,35 +3,33 @@ import { Button, Checkbox, Col, Form, Radio, Row, Typography } from 'antd'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 import Modal from 'antd/lib/modal/Modal'
+import { Moment } from 'moment';
 import React, { useState } from 'react'
+import { calendar } from '../../../../../../asset/Icon/iconHome';
 import CustomDatePicker from '../../../../../../components/DatePicker';
 import styles from '../../../../Styles.module.scss'
-type formType = {
-    checkIn: CheckboxValueType[];
-    dayrange: DayRange;
-    statusUse: boolean;
+export type formType = {
+    checkIn?: CheckboxValueType[];
+    from: Moment;
+    to: Moment;
+    statusUse?: any;
 }
 type Props = {
-    setIsVisiableModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setCheckedList: React.Dispatch<React.SetStateAction<CheckboxValueType[]>>;
     isVisiableModal: boolean;
+    onSort: (value: formType) => void;
+    defaultCheckedList: string[];
+    checkedList: CheckboxValueType[];
+    setStatusUse: any;
+    dayRange: any;
+    setDayRange: any;
 }
-const defaultCheckedList = ['Cổng 1', 'Cổng 2', 'Cổng 3', 'Cổng 4', 'Cổng 5'];
 const plainOptions = ['Cổng 1', 'Cổng 2', 'Cổng 3', 'Cổng 4', 'Cổng 5'];
 const ModalSort: React.FC<Props> = (props: Props) => {
-    const [checkedList, setCheckedList] = useState<CheckboxValueType[]>(defaultCheckedList);
     const [checkAll, setCheckAll] = useState(false);
     const [indeterminate, setIndeterminate] = useState(true);
-    const { setIsVisiableModal, isVisiableModal } = props;
-    const [dayRange, setDayRange] = useState<DayRange>({
-        from: null,
-        to: null,
-    });
+    const { isVisiableModal, onSort, setCheckedList, checkedList, setStatusUse, dayRange, setDayRange } = props;
     const [form] = Form.useForm();
-    const onSort = (value: formType) => {
-        value.checkIn = checkedList
-        console.log(value)
-        setIsVisiableModal(false)
-    }
     const onChange = (list: CheckboxValueType[]) => {
         setCheckedList(list);
         // setIndeterminate(!!list.length && list.length < plainOptions.length);
@@ -65,6 +63,7 @@ const ModalSort: React.FC<Props> = (props: Props) => {
                                 dayRange={dayRange}
                                 setDayRange={setDayRange}
                                 inputClassName={styles.datePicker}
+                                icon={calendar}
                             />
                         </Form.Item>
                     </Col>
@@ -75,12 +74,13 @@ const ModalSort: React.FC<Props> = (props: Props) => {
                                 dayRange={dayRange}
                                 setDayRange={setDayRange}
                                 inputClassName={styles.datePicker}
+                                icon={calendar}
                             />
                         </Form.Item>
                     </Col>
                     <Form.Item label={'Tình trạng sử dụng'} name='statusUse'>
-                        <Radio.Group style={{ width: 634 }}>
-                            <Radio value={'null'}>
+                        <Radio.Group style={{ width: 634 }} onChange={(e) => setStatusUse(e.target.value)}>
+                            <Radio value={undefined}>
                                 <Typography.Text className={styles.radioText}>Tất cả</Typography.Text>
                             </Radio>
                             <Radio value={'used'} className={styles.radio}>

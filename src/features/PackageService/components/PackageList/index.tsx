@@ -6,7 +6,6 @@ import { packageType } from '../../../../interface/ticket';
 import Table, { ColumnsType } from 'antd/lib/table';
 import { edit } from '../../../../asset/Icon/iconHome';
 import ModalAdd from './components/modal/ModalAdd';
-import ModalUpdate from './components/modal/ModalUpdate';
 import { useAppdispatch, useAppSelector } from '../../../../store';
 import { getAll, packageSelector } from '../../packageSlice';
 import moment from 'moment';
@@ -38,14 +37,10 @@ export const data: any[] = [
 const PackageList = (props: Props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalUpdateVisible, setIsModalUpdateVisible] = useState(false);
+    const [update, setUpdate] = useState<boolean>(false)
+    const [id, setId] = useState<string | undefined>(undefined);
     const dispatch = useAppdispatch()
-    const { packages } = useAppSelector(packageSelector);
-
-    packages.map((pack) => {
-        console.log(moment(pack.dateApply?.toDate()).format('DD/MM/YYYY'))
-        return pack
-    })
-    console.log(packages)
+    const { packages, loading } = useAppSelector(packageSelector);
 
     useEffect(() => {
         dispatch(getAll())
@@ -56,6 +51,7 @@ const PackageList = (props: Props) => {
 
     const handleCancel = () => {
         setIsModalVisible(false);
+        setId(undefined)
 
     };
     const handleUpdateCancel = () => {
@@ -115,14 +111,8 @@ const PackageList = (props: Props) => {
             )
         },
         {
-            key: 'action',
-            render: (_, record) => (
-                <Space size="middle" className={styles.icon_edit} >
-                    <Icon component={edit} />
-                    <a className={styles} onClick={() => setIsModalUpdateVisible(true)}>Cập nhật</a>
-                    <ModalUpdate isModalUpdateVisible={isModalUpdateVisible} setIsModalUpdateVisible={setIsModalUpdateVisible} handelCancel={handleUpdateCancel} />
-                </Space>
-            ),
+            key: 'edit',
+            dataIndex: 'edit'
         }
     ];
     const headers = [
@@ -141,7 +131,6 @@ const PackageList = (props: Props) => {
         dateExp: moment(pack.dateExp?.toDate()).format('HH:mm DD/MM/YYYY'),
         ...pack
     }))
-    console.log(data)
     return (
         <Card className={styles.container}>
             <Row className={styles.container_warp}>
@@ -162,20 +151,28 @@ const PackageList = (props: Props) => {
                         </CSVLink>
                     </Col>
                     <Col span={4}>
-                        <Button className={styles.btn_add} onClick={showModal}>
+                        <Button className={styles.btn_add} onClick={() => { setIsModalVisible(true); setId(undefined) }}>
                             <Typography.Text className={styles.text_add}>
                                 Thêm gói vé
                             </Typography.Text>
                         </Button >
-                        <ModalAdd isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} handelCancel={handleCancel} />
+                        <ModalAdd id={id} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} handelCancel={handleCancel} />
                     </Col>
                 </Col>
             </Row>
             <Table
                 rowClassName={(record: any, index: any) => index % 2 === 0 ? styles.light : styles.dark}
                 columns={columns}
-                dataSource={packages.map((pack) => ({
-                    ...pack
+                dataSource={packages.map((pack, index) => ({
+                    ...pack,
+                    stt: index + 1,
+                    edit: (
+                        <Space size="middle" className={styles.icon_edit} >
+                            <Icon component={edit} />
+                            <a className={styles} onClick={() => { setIsModalVisible(true); setId(pack.id); setUpdate(true) }}>Cập nhật</a>
+                            <ModalAdd id={id} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} handelCancel={handleCancel} />
+                        </Space>
+                    )
                 }))}
                 pagination={{
                     style: { marginTop: 280 },
@@ -195,6 +192,7 @@ const PackageList = (props: Props) => {
                 }}
                 className={styles.table}
                 bordered={false}
+                loading={loading}
             />
         </Card>
     )

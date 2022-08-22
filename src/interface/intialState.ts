@@ -13,7 +13,7 @@ export interface defaultTicketState {
 
 export interface defaultPackageState {
     loading: boolean;
-    package: packageType | null;
+    pack: packageType | null;
     packages: packageType[];
     packageFilter: packageType[];
     message: {

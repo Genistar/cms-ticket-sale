@@ -113,6 +113,20 @@
     height: 628px;
     width: 758px;
     border-radius: 16px;
+    .label {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 26px;
+    }
+    .labelAfter::after{
+        display: inline-block;
+        margin-left: 5px;
+        color: #ff4d4f;
+        font-size: 16px;
+        font-family: SimSun, sans-serif;
+        line-height: 1;
+        content: '*';
+    }
     .input_label{
         position: absolute;
         font-family: 'Montserrat';
@@ -154,6 +168,7 @@
             }
         }
         .timePicker{
+            position: relative;
             box-sizing: border-box;
             display: flex;
             flex-direction: row;
@@ -164,7 +179,7 @@
             position: absolute;
             width: 129px;
             height: 40px;
-            top: 0px;
+            top: 33px;
             border: 1px solid #A5A8B1;
             border-radius: 8px;
         }
@@ -213,10 +228,48 @@
         border-radius: 8px;
         
     }
+    
 }
+.warning::before{
+    display: inline-block;
+    margin-right: 4px;
+    color: #ff4d4f;
+    font-size: 14px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+    content: '*';
+}
+.warning{
+        position: absolute;
+        width: 189px;
+        height: 15px;
+        top:496.5px;
+        left:32px;
+        font-family: 'Montserrat';
+        font-style: italic;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        /* identical to box height */
+        
+        display: flex;
+        align-items: center;
+        
+        /* Text */
+        
+        color: #1E0D03;
+        
+        opacity: 0.6;
+        
+        /* Inside auto layout */
+        
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }
 .content_header{
     position: absolute;
-    width: 155px;
+    width: 255px;
     height: 30px;
     left: 302px;
     top: 24px;
@@ -302,10 +355,11 @@
             flex: none;
             order: 0;
             flex-grow: 0;
-            margin-left: -10px;
+            margin-right: 20px;
         }
     }
 }
+
 .infor{
     display: flex;
     flex-direction: row;

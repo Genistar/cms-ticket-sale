@@ -6,18 +6,42 @@ import Icon, { CaretRightOutlined, CaretLeftOutlined, SearchOutlined } from '@an
 import { Badge, Button, Col, Form, Input, Row, Tag, Typography } from 'antd';
 import { sort } from '../../../../../../asset/Icon/iconHome';
 import moment from 'moment';
-import ModalSort from '../ModalSort';
+import ModalSort, { formType } from '../ModalSort';
 import { CSVLink } from 'react-csv';
+import { CheckboxValueType } from 'antd/lib/checkbox/Group';
 type Props = {
     dataProps: TicketType[];
     packages?: any;
     setKeywords: React.Dispatch<React.SetStateAction<string>>
     loading: boolean;
+    setCheckedList: React.Dispatch<React.SetStateAction<CheckboxValueType[]>>;
+    isVisiableModal: boolean;
+    onSort: (value: formType) => void;
+    defaultCheckedList: string[];
+    checkedList: CheckboxValueType[]
+    setIsVisiableModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setStatusUse: any;
+    dateRange: any;
+    setdateRange: any;
 }
-
+const defaultCheckedList = ['Cổng 1', 'Cổng 2', 'Cổng 3', 'Cổng 4', 'Cổng 5'];
 const TableCustom: React.FC<Props> = (props: Props) => {
-    const [isVisiableModal, setIsVisiableModal] = useState<boolean>(false);
-    const { dataProps, packages, setKeywords, loading } = props;
+    const {
+        setCheckedList,
+        isVisiableModal,
+        onSort,
+        defaultCheckedList,
+        checkedList,
+        dataProps,
+        packages,
+        setKeywords,
+        loading,
+        setIsVisiableModal,
+        setStatusUse,
+        dateRange,
+        setdateRange
+    } = props
+
     const columns: ColumnsType<any> = [
         {
             title: 'STT',
@@ -41,11 +65,13 @@ const TableCustom: React.FC<Props> = (props: Props) => {
             render: (data) => (
                 <Tag
                     color={data === 'used' ? '#EAF1F8' : data === 'unused' ? 'green' : 'red'}
-                    className={data === 'used' ? styles.grey : data === 'unused' ? 'green' : 'red'}
+                    className={`${data === 'used' ? styles.grey : data === 'unused' ? 'green' : 'red'} ${styles.status}`}
                 >
                     <Badge status={data === 'used' ? 'default' : data === 'unused' ? 'success' : 'warning'} />
                     {data === 'used' ? 'Đã sử dụng' : data === 'unused' ? 'Chưa sử dụng' : 'Hết hạn'}
+
                 </Tag>
+
             )
         },
         {
@@ -82,6 +108,7 @@ const TableCustom: React.FC<Props> = (props: Props) => {
         checkIn: ticket.checkIn,
         ticketNumber: ticket.ticketNumber
     }))
+
     return (
         <Row className={styles.container} style={{ top: packages >= 2 ? 55 : 70 }}>
             <Col span={6}>
@@ -105,12 +132,18 @@ const TableCustom: React.FC<Props> = (props: Props) => {
                             Lọc vé
                         </Button>
                         <ModalSort
-                            setIsVisiableModal={setIsVisiableModal}
                             isVisiableModal={isVisiableModal}
+                            onSort={onSort}
+                            setCheckedList={setCheckedList}
+                            defaultCheckedList={defaultCheckedList}
+                            checkedList={checkedList}
+                            setStatusUse={setStatusUse}
+                            dayRange={dateRange}
+                            setDayRange={setdateRange}
                         />
                     </Form.Item>
                     <Form.Item>
-                        <CSVLink headers={headers} data={dataProps} className={styles.button_2}>
+                        <CSVLink headers={headers} data={data} className={styles.button_2}>
                             <Typography.Text className={styles.btnText}>
                                 Xuất file {'(.csv)'}
                             </Typography.Text>
@@ -122,11 +155,11 @@ const TableCustom: React.FC<Props> = (props: Props) => {
             <Table
                 rowClassName={(record: any, index: any) => index % 2 === 0 ? styles.light : styles.dark}
                 columns={columns}
-                dataSource={dataProps.map((ticket) => ({
+                dataSource={dataProps.map((ticket, index) => ({
                     dateUsed: moment(ticket.dateUsed?.toDate()).format('DD/MM/YYYY'),
                     dateOut: moment(ticket.dateOut?.toDate()).format('DD/MM/YYYY'),
                     ticketId: ticket.ticketId,
-                    stt: ticket.stt,
+                    stt: index + 1,
                     statusUse: ticket.statusUse,
                     checkIn: ticket.checkIn,
                     ticketNumber: ticket.ticketNumber

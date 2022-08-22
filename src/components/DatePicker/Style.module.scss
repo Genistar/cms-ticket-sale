@@ -18,11 +18,16 @@
     left: 32px;
     top: -260px;
     border-radius: 0px;
-
-}
-.select{
-    width: 32px;
-    height: 32px;
-    background: #FFBA7B;
-}
+    }
+    .select{
+        width: 32px;
+        height: 32px;
+        background: #FFD2A8;
+    }
+    .selectStart{
+        background-color: #FFBA7B;
+    }
+    .selectEnd{
+        background-color: #FFBA7B;
+    }
 }

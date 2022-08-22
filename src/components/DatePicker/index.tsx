@@ -17,12 +17,15 @@ type Props = {
     type?: string;
     hasOption?: boolean;
     inputClassName?: string;
+    icon?: any;
+    format?: string;
 }
 
-const CustomDatePicker = (props: Props) => {
+const CustomDatePicker: React.FC<Props> = (props: Props) => {
     const [typeCalendar, setTypeCalendar] = useState<string>('date')
     const [value, setValue] = useState(props.value);
     const { hasOption = true } = props;
+    const { icon, format } = props
     useEffect(() => {
         setValue(props.value);
     }, [props.value, props]);
@@ -65,8 +68,8 @@ const CustomDatePicker = (props: Props) => {
             value={typeCalendar === 'date' ? value : props.dayRange}
             calendarSelectedDayClassName={styles.select}
             calendarRangeBetweenClassName={styles.select}
-            calendarRangeStartClassName={styles.select}
-            calendarRangeEndClassName={styles.select}
+            calendarRangeStartClassName={`${styles.select} ${styles.selectStart}`}
+            calendarRangeEndClassName={`${styles.select} ${styles.selectStart}`}
             locale={myCustomLocale}
             renderFooter={
                 hasOption ? () => (
@@ -92,10 +95,11 @@ const CustomDatePicker = (props: Props) => {
                 value={value ? moment({ ...value, month: value.month - 1 }) : undefined}
                 panelRender={() => undefined}
                 size='large'
-                format={'DD/MM/YYYY'}
-                placeholder={'dd/mm/yyyy'}
+                format={format ? format : 'DD/MM/YYYY'}
+                placeholder={'Chọn ngày'}
                 onChange={onChange}
                 className={props.inputClassName}
+                suffixIcon={<Icon component={icon} />}
             />
         </Popover>
     )

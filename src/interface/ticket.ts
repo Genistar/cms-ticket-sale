@@ -5,11 +5,11 @@ export interface TicketType {
     id?: string;
     ticketId: string;
     ticketNumber: number;
-    status: boolean | null;
+    status?: boolean | null;
     dateUsed?: Timestamp;
     dateOut?: Timestamp;
     dateExp?: Timestamp;
-    checkIn: string;
+    checkIn: any;
     ticketPiece?: string;
     statusUse?: 'used' | 'unused' | 'exp';
     packageId?: string;

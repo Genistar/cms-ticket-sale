@@ -12,6 +12,15 @@
 .anticon-calendar,.anticon-clock-circle{
     color: #FF993C;
 }
+.Style_calendarWrapper__XJl2W .Style_select__fxyRZ{
+    background: #FFD2A8;
+}
+.Calendar__day.-ltr.-selectedEnd{
+    background-color: #FFBA7B;
+}
+.Calendar__day.-ltr.-selectedStart{
+    background-color: #FFBA7B;
+}
 .Calendar__weekDays {
     top:76px
 }

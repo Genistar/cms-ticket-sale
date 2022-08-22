@@ -8,6 +8,8 @@ import { TicketType } from '../../../interface/ticket';
 import { calendar1 } from '../../../asset/Icon/iconHome';
 import { useAppdispatch, useAppSelector } from '../../../store';
 import { getAll, ticketSelector } from '../../TicketManagement/ticketSlice';
+import CustomDatePicker from '../../../components/DatePicker';
+import { DayRange } from '@hassanmojab/react-modern-calendar-datepicker';
 
 type Props = {}
 type formValue = {
@@ -16,15 +18,18 @@ type formValue = {
     form: Date;
 }
 const CheckList = (props: Props) => {
-    const [status, setStatus] = useState<boolean | null>(null);
-    const [to, setTo] = useState<Date>();
-    const [from, setFrom] = useState<Date>();
+    const [keywords, setKeywords] = useState<string>('');
     const { tickets, loading } = useAppSelector(ticketSelector);
+    const [status, setStatus] = useState<boolean | null>(null)
     const dispatch = useAppdispatch();
     const [form] = Form.useForm();
+    const [dayRange, setDayRange] = useState<DayRange>({
+        from: null,
+        to: null
+    })
     useEffect(() => {
-        dispatch(getAll())
-    }, [])
+        dispatch(getAll({ filter: { keywords } }))
+    }, [keywords])
     const columns: ColumnsType<any> = [
         {
             title: 'STT',
@@ -63,11 +68,23 @@ const CheckList = (props: Props) => {
         }
     ];
     const onFinish = (va: formValue) => {
-        setFrom(va.form);
-        setTo(va.to);
-        setStatus(va.status)
-        console.log(va.status)
+        console.log(va)
+        dispatch(getAll({
+            modalFilter: {
+                status: va.status,
+                from: dayRange.from ? moment({
+                    ...dayRange.from,
+                    month: dayRange.from ? dayRange.from.month - 1 : 0
+                }) : null,
+                to: dayRange.to ? moment({
+                    ...dayRange.to,
+                    month: dayRange.to ? dayRange.to.month - 1 : 0
+                }) : null,
+            }
+        }))
     }
+    console.log(tickets)
+
     return (
         <Row>
             <Col flex={6}>
@@ -79,6 +96,7 @@ const CheckList = (props: Props) => {
                                 suffix={<SearchOutlined style={{ fontSize: 24 }} />}
                                 bordered={false}
                                 className={styles.search}
+                                onChange={(e) => setKeywords(e.target.value)}
                             />
                         </Col>
                         <Col span={4}>
@@ -88,8 +106,9 @@ const CheckList = (props: Props) => {
                     <Table
                         rowClassName={(record: any, index: any) => index % 2 === 0 ? styles.light : styles.dark}
                         columns={columns}
-                        dataSource={tickets.map(ticket => ({
-                            ...ticket
+                        dataSource={tickets.map((ticket, index) => ({
+                            ...ticket,
+                            stt: index + 1
                         }))}
                         pagination={{
                             pageSize: 10,
@@ -129,24 +148,27 @@ const CheckList = (props: Props) => {
                             <Typography.Text style={{ marginLeft: 120 }}>Vé cổng</Typography.Text>
                         </Form.Item>
                         <Form.Item label={'Từ ngày'} name='to'>
-                            <DatePicker
-                                className={styles.datepicker}
-                                suffixIcon={<Icon component={calendar1}
-                                    placeholder='Chọn ngày' />}
-                                style={{ marginLeft: 110 }}
+                            <CustomDatePicker
+                                type="from"
+                                dayRange={dayRange}
+                                setDayRange={setDayRange}
+                                inputClassName={`${styles.datepicker} ${styles.datepickerFirst}`}
+                                icon={calendar1}
                             />
                         </Form.Item>
                         <Form.Item label={'Đến ngày'} name='from'>
-                            <DatePicker
-                                className={styles.datepicker}
-                                suffixIcon={<Icon component={calendar1}
-                                    placeholder='Chọn ngày' />}
-                                style={{ marginLeft: 98 }}
+                            <CustomDatePicker
+                                type="to"
+                                dayRange={dayRange}
+                                setDayRange={setDayRange}
+                                inputClassName={styles.datepicker}
+                                icon={calendar1}
                             />
                         </Form.Item>
                         <Button
                             htmlType='submit'
                             className={styles.btn_sort}
+                            ghost
                         >
                             <Typography.Text className={styles.text}>Lọc</Typography.Text>
                         </Button>

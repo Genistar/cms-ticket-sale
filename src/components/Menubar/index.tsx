@@ -1,6 +1,7 @@
-import { Menu, MenuProps } from 'antd';
+import { Menu, MenuProps, Typography } from 'antd';
 import Icon, {
-    SettingOutlined
+    SettingOutlined,
+    HomeOutlined
 } from '@ant-design/icons';
 import React from 'react';
 import styles from './Style.module.scss'
@@ -13,7 +14,7 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 function getItem(
     label: React.ReactNode,
-    key: React.Key,
+    key?: React.Key,
     icon?: React.ReactNode,
     children?: MenuItem[],
     type?: 'group',
@@ -27,10 +28,10 @@ function getItem(
     } as MenuItem;
 }
 const items: MenuItem[] = [
-    getItem(<Link to='/home' style={{ fontWeight: 700 }}>Trang chủ</Link>, '/home', <Icon color='#000' component={home} />),
+    getItem(<Link to='/home' style={{ fontWeight: 700 }}>Trang chủ</Link>, '/home', <HomeOutlined />),
     getItem(<Link to='/ticketmanagament' style={{ fontWeight: 700 }}>Quản lý vé</Link>, '/ticketmanagament', <Icon component={ticket} />),
     getItem(<Link to='/checkticket' style={{ fontWeight: 700 }}>Đối soát vé</Link>, '/checkticket', <Icon component={check} />),
-    getItem('Cài đặt', '/setting', <Icon component={setting} />, [
+    getItem('Cài đặt', '', <SettingOutlined />, [
         getItem(<Link to='/setting/servicepackage' style={{ color: '#000', fontWeight: 700 }}>Gói dịch vụ</Link>, '/setting/servicepackage')
     ]
     ),

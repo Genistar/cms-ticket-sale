@@ -17,13 +17,23 @@ body{
 .ant-menu > .ant-menu-submenu:hover,
 .ant-menu > .ant-menu-item-active,
 .ant-menu> .ant-menu-submenu-active,
-.ant-menu > .ant-menu-item-open,
-.ant-menu> .ant-menu-submenu-open,
-.ant-menu > .ant-menu-item-selected,
-.ant-menu > .ant-menu-submenu-selected
+.ant-menu > .ant-menu-item-selected
 {
   background-color: #FFB800;
   color: #fff;
+}
+.ant-menu> .ant-menu-submenu-active{
+  color: #fff;
+}
+
+.ant-menu > .ant-menu-submenu-selected,
+.ant-menu > .ant-menu-item-open,
+.ant-menu> .ant-menu-submenu-open{
+  background-color: #F1F4F8;
+  color: #1E0D03;
+}
+.ant-menu-submenu-selected{
+  color: #1E0D03 !important;
 }
 .ant-menu-vertical > .ant-menu-item {
   height: 44px;
@@ -43,7 +53,7 @@ body{
 
 .ant-menu-submenu-selected {
   background-color: #FFB800 ;
-  color: #ffffff !important;
+  color: #1E0D03 !important;
 }
 
 .ant-menu-item-active,
@@ -72,7 +82,7 @@ body{
   border-radius: 8px ;
 }
 .ant-menu-item a:hover{
-  color: #fff;
+  color: #fff !important;
 }
 .ant-menu-inline.ant-menu-root .ant-menu-item, .ant-menu-inline.ant-menu-root .ant-menu-submenu-title {
   height: 52px;
@@ -210,4 +220,26 @@ body{
 } 
 .ant-checkbox-inner::after{
   left:32.5%
+}
+
+.Calendar__monthYear.-shown {
+  width: 200px;
+  font-size: 14px;
+  margin-left: 20px;
+}
+.Calendar > :not(.Calendar__footer) button {
+  font-size: 16px;
+}
+.Calendar__monthArrowWrapper.-right {
+  transform: rotate(-90deg);
+  position: absolute;
+  left: 0px;
+}
+.Calendar__monthArrowWrapper.-left{
+  position: absolute;
+  left: 175px;
+}
+.Calendar__monthArrow{
+  width: 1.1em;
+  height: 1.1em;
 }
